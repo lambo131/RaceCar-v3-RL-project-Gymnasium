@@ -1,0 +1,101 @@
+CLASS DQNAgent:
+    DEF __init__(config, render_mode='none'):
+        SET self.config = config                                        1. load configuration
+        SET self.device = CUDA if available else CPU                    2. define CUDA device
+        
+        # Environment setup
+        SET self.env = MyRaceCarEnv with specified hyperparameters and render_mode              3. define environment (wrapper or gym.env)
+        
+        # Neural networks                                       4. define policy and target networks (set target net to eval mode)
+        INIT policy_net as DQN with config parameters
+        INIT target_net as copy of policy_net
+        SET target_net to evaluation mode                       
+        
+        # Training components                                   5. define training components (optimizer and replay memory)
+        INIT optimizer (Adam) for policy_net
+        INIT replay memory buffer with specified size
+        
+        # Training state                                        6. define training state info (epsilon, step_counter(transitions), history list for reward and epsilon)
+        SET epsilon = initial_epsilon
+        SET step counter = 0
+        INIT empty lists for episode rewards and epsilons       
+    
+    DEF select_action(state):                                   # Epsilon greedy action selection 
+        IF random number < epsilon:
+            RETURN random action
+        ELSE:
+            CONVERT state to tensor
+            GET q_values from policy_net
+            RETURN action with max q_value
+    
+    DEF update_model():                                         # Optimize the policy network
+        IF memory has enough samples:
+            SAMPLE batch from memory
+            CONVERT batch elements to tensors
+            
+            # Calculate current Q estimates
+            GET current_q from policy_net for states and actions
+            
+            # Calculate target Q values
+            WITH no gradients:
+                GET max next_q from target_net for next_states
+                CALCULATE target_q using rewards and discount factor
+            
+            # Optimize
+            CALCULATE loss (Huber/SmoothL1)
+            PERFORM backpropagation
+            APPLY gradient clipping
+            UPDATE policy_net weights
+    
+    DEF update_epsilon():
+        DECAY epsilon using decay rate
+        ENSURE epsilon doesn't go below minimum
+    
+    DEF train(num_episodes):
+        CREATE runs directory if needed
+        
+        FOR each episode:
+            RESET environment, get initial state
+            INIT total_reward = 0
+            SET done = False
+            RECORD start time
+            
+            WHILE not done:
+                # Main training loop
+                SELECT action using current policy
+                EXECUTE action in environment
+                STORE transition in memory
+                UPDATE state and total reward
+                INCREMENT step counter
+                
+                # Learning updates
+                UPDATE model weights
+                IF sync interval reached:
+                    UPDATE target network
+                UPDATE exploration rate (epsilon)
+            
+            # Episode complete
+            RECORD episode reward and epsilon
+            PRINT progress statistics
+            
+            # Periodic saving
+            IF episode is multiple of 10:
+                SAVE training history plot
+            
+            # Early stopping check
+            IF average reward over last 10 episodes meets threshold:
+                PRINT success message
+                BREAK training loop
+        
+        SAVE final training history plot
+    
+    DEF save_history():
+        CREATE plot with two subplots:
+            1. Episode rewards over time
+            2. Epsilon decay over time
+        SAVE plot to file
+        CLOSE plot to free memory
+
+IF main program:
+    INIT agent with configuration and render mode
+    START training loop

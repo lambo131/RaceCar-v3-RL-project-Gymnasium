@@ -1,0 +1,19 @@
+RaceCar_1:
+  env_name: 'RaceCar-v0'
+  skip_frames: 4
+  stack_frames: 4 
+  resize_height: 84
+  resize_width: 84
+  state_dim: [4, 84, 84]
+  action_dim: 5
+  train_stop_reward: 800
+  replay_memory_size: 10000
+  mini_batch_size: 32
+  initial_epsilon: 0.05
+  min_epsilon: 0.03
+  epsilon_decay: 0.9995
+  discount_factor: 0.99
+  target_sync_freq: 100
+  learning_rate: 0.00005
+  hidden_nodes: 128
+  hidden_layers: 2
