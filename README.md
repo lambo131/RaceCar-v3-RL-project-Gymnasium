@@ -1,3 +1,14 @@
+Hello! This is a guide to how to setup and run this project. The project has two files two can run
+
+1. Env_Wrapper_Demo.ipynb: A notebook showing how my env wrapper class works, and what it does in a step by step approach. This env wrapper is used in main.py as well
+2. main.py: This file allows you to train the DQN model to play the race car game, and to play the game with a loaded model.
+
+**> Let's go!!**
+
+Bilibili video: TBC...
+
+Youtube video: TBC...
+
 # Python Environment
 
 1. python version: Python 3.9.23 (main, Jun  5 2025, 13:25:08) [MSC v.1929 64 bit (AMD64)] on win32
@@ -61,7 +72,7 @@ We will run the train and run program with the **vscode debugger tool**. Here is
 4. Click on the debug icon on the left panel
 5. Select the launch configurations from the drop down list next to the play button
 
-   ![1753945875396](image/README/1753945875396.png)
+   ![img](docs/1753945875396.png "launch selection")
 
    You can first try `Run RaceCar_1`, see if everything is working.
 
