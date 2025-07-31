@@ -4,3 +4,5 @@ other/
 .vscode/
 __pycache__/
 FETCH_HEAD
+poetry.lock
+pyproject.toml
