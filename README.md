@@ -28,6 +28,8 @@ Youtube video: TBC...
 
 ### Preparing virtual environment (with Conda)
 
+[How to use conda/miniconda](https://www.youtube.com/watch?v=hDGSZMLS5F4)
+
 Follow these steps to install all python packages:
 
 ```
@@ -80,7 +82,7 @@ We will run the train and run program with the **vscode debugger tool**. Here is
 
 ### config.yml
 
-    You can make changes to hyperparameters in config.yml
+You can make changes to hyperparameters in config.yml
 
 ### main.py
 
@@ -105,5 +107,7 @@ In    `if__name__ == "__main__":`
 * Decisides whether or not to load policy network from `./runs/best_model_RaceCar_1.pt`. If it loads the policy, the model will continue training from the previous stage, not starting over from random weights
 
 ## Demo Notebook (GitHub Viewer)
+
+This is the Env_Wrapper_Demo.ipynb file
 
 [View the demo notebook](./Env_Wrapper_Demo.ipynb)
